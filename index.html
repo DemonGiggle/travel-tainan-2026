@@ -28,6 +28,8 @@
         },
       };
     </script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
       :root {
         color-scheme: light;
@@ -297,6 +299,14 @@
               <div class="navi-row"><span class="navi-time">16:00</span><span class="navi-loc">抵達淡水</span></div>
             </div>
 
+            <!-- Map Container -->
+            <div class="navi-divider"></div>
+            <div class="mt-2">
+              <p class="text-xs font-semibold uppercase tracking-[0.3em] text-teal">路線地圖</p>
+              <h3 class="mt-1 mb-3 text-base font-semibold text-ink">三天行程總覽</h3>
+              <div id="travel-map" class="h-[400px] w-full rounded-2xl border border-slate-200 shadow-sm sm:h-[500px]"></div>
+            </div>
+
           </article>
         </section>
       </div>
@@ -315,6 +325,89 @@
     .navi-divider { height: 1px; background: linear-gradient(90deg, #0f766e30 0%, transparent 100%); margin: 8px 0; }
   </style>
   <script>
+    let mapInitialized = false;
+    let travelMap = null;
+
+    function initTravelMap() {
+      if (mapInitialized) return;
+      mapInitialized = true;
+
+      travelMap = L.map('travel-map', {
+        zoomControl: true,
+        scrollWheelZoom: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19
+      }).addTo(travelMap);
+
+      const dayColors = { 1: '#fb7185', 2: '#0f766e', 3: '#f59e0b' };
+      const dayLabels = { 1: 'Day 1 &middot; 10/24', 2: 'Day 2 &middot; 10/25', 3: 'Day 3 &middot; 10/26' };
+
+      const spots = [
+        { day:1, time:'07:00', name:'淡水（家）出發',            lat:25.1813, lng:121.4531 },
+        { day:1, time:'09:30', name:'湖口休息區',                lat:24.8610, lng:121.0120 },
+        { day:1, time:'12:00', name:'審計新村／草悟道（台中）',  lat:24.1434, lng:120.6642 },
+        { day:1, time:'12:30', name:'午餐（勤美商圈）',          lat:24.1508, lng:120.6632 },
+        { day:1, time:'17:00', name:'南兜漫旅 Check-in',         lat:22.9940, lng:120.1984 },
+        { day:1, time:'20:00', name:'神農街／海安路散步',        lat:22.9976, lng:120.1966 },
+        { day:2, time:'08:30', name:'南兜漫旅早餐',              lat:22.9940, lng:120.1984 },
+        { day:2, time:'10:00', name:'奇美博物館（法老特展）',    lat:22.9348, lng:120.2261 },
+        { day:2, time:'12:30', name:'午餐（奇美周邊）',          lat:22.9340, lng:120.2250 },
+        { day:2, time:'14:00', name:'台南市區散步／咖啡',        lat:22.9870, lng:120.2000 },
+        { day:2, time:'20:30', name:'回南兜漫旅',                lat:22.9940, lng:120.1984 },
+        { day:3, time:'08:30', name:'南兜漫旅早餐',              lat:22.9940, lng:120.1984 },
+        { day:3, time:'10:00', name:'退房・北返',                lat:22.9940, lng:120.1984 },
+        { day:3, time:'16:00', name:'抵達淡水',                  lat:25.1813, lng:121.4531 },
+      ];
+
+      function createIcon(day, idx, total) {
+        const color = dayColors[day];
+        const size = idx === 0 || idx === total - 1 ? 14 : 10;
+        const label = idx === 0 ? 'S' : idx === total - 1 ? 'E' : '';
+        return L.divIcon({
+          className: 'custom-marker',
+          html: `<div style="width:${size*2}px;height:${size*2}px;background:${color};border:2px solid white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:white;">${label}</div>`,
+          iconSize: [size*2, size*2],
+          iconAnchor: [size, size],
+          popupAnchor: [0, -size-4]
+        });
+      }
+
+      const allPoints = [];
+      for (let d = 1; d <= 3; d++) {
+        const daySpots = spots.filter(s => s.day === d);
+        const points = daySpots.map(s => [s.lat, s.lng]);
+        allPoints.push(...points);
+
+        if (points.length > 1) {
+          L.polyline(points, {
+            color: dayColors[d], weight: 3, opacity: 0.55,
+            dashArray: d === 3 ? '8,6' : ''
+          }).addTo(travelMap);
+        }
+
+        daySpots.forEach((s, i) => {
+          const icon = createIcon(d, i, daySpots.length);
+          const marker = L.marker([s.lat, s.lng], { icon }).addTo(travelMap);
+          marker.bindPopup(`<strong style="color:${dayColors[d]};">${dayLabels[d]}</strong><br/><span style="font-size:0.85rem;">\uD83D\uDD50 ${s.time}</span><br/><span style="font-size:0.9rem;">\uD83D\uDCCD ${s.name}</span>`);
+        });
+      }
+
+      if (allPoints.length > 0) {
+        travelMap.fitBounds(allPoints, { padding: [40, 40] });
+      }
+
+      const legend = L.control({ position: 'bottomleft' });
+      legend.onAdd = function() {
+        const div = L.DomUtil.create('div', 'map-legend');
+        div.innerHTML = '<div style="background:white;padding:6px 10px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.12);font-size:0.75rem;line-height:1.6;"><div><span style="display:inline-block;width:10px;height:3px;background:#fb7185;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Day 1</div><div><span style="display:inline-block;width:10px;height:3px;background:#0f766e;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Day 2</div><div><span style="display:inline-block;width:10px;height:3px;background:#f59e0b;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Day 3（回程）</div></div>';
+        return div;
+      };
+      legend.addTo(travelMap);
+    }
+
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach(b => {
@@ -326,7 +419,14 @@
         btn.classList.add('bg-white', 'text-ink', 'shadow-sm');
         btn.classList.remove('text-slate-400');
         document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-        document.getElementById('tab-' + btn.dataset.tab).classList.remove('hidden');
+        const tab = document.getElementById('tab-' + btn.dataset.tab);
+        tab.classList.remove('hidden');
+        // 如果切到導航清單，初始化地圖（需在可見狀態下才能正確計算尺寸）
+        if (btn.dataset.tab === 'navi') {
+          initTravelMap();
+          // 確保地圖正確渲染
+          setTimeout(() => { if (travelMap) travelMap.invalidateSize(); }, 100);
+        }
       });
     });
   </script>

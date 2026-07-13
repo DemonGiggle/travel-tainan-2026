@@ -98,6 +98,20 @@
         </div>
       </section>
 
+      <!-- Tab Navigation -->
+      <div class="mt-6" id="tab-nav">
+        <div class="flex gap-1 rounded-2xl border border-white/70 bg-white/70 p-1 shadow-sm" role="tablist">
+          <button class="tab-btn flex-1 rounded-xl px-4 py-2.5 text-sm font-medium transition-all" data-tab="overview" role="tab" aria-selected="true">
+            行程總覽
+          </button>
+          <button class="tab-btn flex-1 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-400 transition-all hover:text-slate-700" data-tab="navi" role="tab" aria-selected="false">
+            導航清單
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab: 行程總覽 -->
+      <div id="tab-overview" class="tab-content">
       <section class="mt-6 grid gap-6 lg:grid-cols-[1.35fr_0.85fr]">
         <div class="space-y-6">
           <article class="glass rounded-[1.75rem] border border-white/70 p-5 shadow-sm sm:p-6">
@@ -229,6 +243,92 @@
 
         </aside>
       </section>
+      </div>
+
+      <!-- Tab: 導航清單 -->
+      <div id="tab-navi" class="tab-content hidden">
+        <section class="mt-6 space-y-5">
+          <article class="glass rounded-[1.75rem] border border-white/70 p-5 shadow-sm sm:p-6">
+
+            <!-- Day 1 -->
+            <div class="navi-day-header">
+              <span class="navi-day-badge">DAY 1</span>
+              <span class="navi-day-date">10/24（六）— 淡水 → 台中 → 台南</span>
+            </div>
+            <div class="navi-list">
+              <div class="navi-row"><span class="navi-time">07:00</span><span class="navi-loc">淡水（家）出發</span></div>
+              <div class="navi-row"><span class="navi-time">09:30</span><span class="navi-loc">湖口休息區</span></div>
+              <div class="navi-row"><span class="navi-time">12:00</span><span class="navi-loc">審計新村／草悟道（台中）</span></div>
+              <div class="navi-row"><span class="navi-time">12:30</span><span class="navi-loc">午餐（勤美商圈）</span></div>
+              <div class="navi-row"><span class="navi-time">14:00</span><span class="navi-loc">國道一號南下</span></div>
+              <div class="navi-row"><span class="navi-time">17:00</span><span class="navi-loc">南兜漫旅 Check-in（台南）</span></div>
+              <div class="navi-row"><span class="navi-time">18:30</span><span class="navi-loc">晚餐（中西區）</span></div>
+              <div class="navi-row"><span class="navi-time">20:00</span><span class="navi-loc">神農街／海安路散步</span></div>
+            </div>
+
+            <div class="navi-divider"></div>
+
+            <!-- Day 2 -->
+            <div class="navi-day-header">
+              <span class="navi-day-badge">DAY 2</span>
+              <span class="navi-day-date">10/25（日）— 奇美博物館 + 市區</span>
+            </div>
+            <div class="navi-list">
+              <div class="navi-row"><span class="navi-time">08:30</span><span class="navi-loc">南兜漫旅早餐</span></div>
+              <div class="navi-row"><span class="navi-time">09:30</span><span class="navi-loc">前往奇美博物館</span></div>
+              <div class="navi-row"><span class="navi-time">10:00</span><span class="navi-loc">奇美博物館（法老特展）</span></div>
+              <div class="navi-row"><span class="navi-time">12:30</span><span class="navi-loc">午餐（奇美周邊）</span></div>
+              <div class="navi-row"><span class="navi-time">14:00</span><span class="navi-loc">台南市區散步／咖啡</span></div>
+              <div class="navi-row"><span class="navi-time">18:00</span><span class="navi-loc">晚餐</span></div>
+              <div class="navi-row"><span class="navi-time">20:30</span><span class="navi-loc">回南兜漫旅</span></div>
+            </div>
+
+            <div class="navi-divider"></div>
+
+            <!-- Day 3 -->
+            <div class="navi-day-header">
+              <span class="navi-day-badge">DAY 3</span>
+              <span class="navi-day-date">10/26（一）— 回程</span>
+            </div>
+            <div class="navi-list">
+              <div class="navi-row"><span class="navi-time">08:30</span><span class="navi-loc">南兜漫旅早餐</span></div>
+              <div class="navi-row"><span class="navi-time">10:00</span><span class="navi-loc">退房・北返</span></div>
+              <div class="navi-row"><span class="navi-time">12:00</span><span class="navi-loc">台中停靠（選配）</span></div>
+              <div class="navi-row"><span class="navi-time">16:00</span><span class="navi-loc">抵達淡水</span></div>
+            </div>
+
+          </article>
+        </section>
+      </div>
     </main>
+  <style>
+    .tab-btn[aria-selected="true"] { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .navi-day-header { display: flex; align-items: baseline; gap: 0.75rem; padding: 24px 0 12px; }
+    .navi-day-header:first-of-type { padding-top: 4px; }
+    .navi-day-badge { font-weight: 700; font-size: 0.78rem; color: #0f766e; letter-spacing: 0.08em; }
+    .navi-day-date { font-size: 0.82rem; color: #94a3b8; }
+    .navi-list { display: flex; flex-direction: column; }
+    .navi-row { display: flex; align-items: baseline; gap: 0.75rem; padding: 8px 0; }
+    .navi-row + .navi-row { border-top: 1px solid rgba(0,0,0,0.04); }
+    .navi-time { font-variant-numeric: tabular-nums; min-width: 2.8rem; font-weight: 600; font-size: 0.9rem; color: #0f172a; }
+    .navi-loc { color: #475569; font-size: 0.9rem; }
+    .navi-divider { height: 1px; background: linear-gradient(90deg, #0f766e30 0%, transparent 100%); margin: 8px 0; }
+  </style>
+  <script>
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          b.setAttribute('aria-selected', 'false');
+          b.classList.remove('bg-white', 'text-ink', 'shadow-sm');
+          b.classList.add('text-slate-400');
+        });
+        btn.setAttribute('aria-selected', 'true');
+        btn.classList.add('bg-white', 'text-ink', 'shadow-sm');
+        btn.classList.remove('text-slate-400');
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        document.getElementById('tab-' + btn.dataset.tab).classList.remove('hidden');
+      });
+    });
+  </script>
   </body>
 </html>

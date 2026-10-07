@@ -1,436 +1,807 @@
-<!doctype html>
-<html lang="zh-Hant">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="台南自駕旅遊提案，涵蓋 2026/10/24-10/26 的三天兩夜行程、台中休憩停靠與手機友善版面。"
-    />
-    <title>台南自駕旅遊提案｜2026/10/24-10/26</title>
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="台南自駕旅遊提案，涵蓋 2026/10/24-10/26 的三天兩夜行程、台中休憩停靠與手機友善版面。">
+    <title>台南自駕 • 三天兩夜慢旅 (2026/10/24-10/26) | Tainan Travel Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              ink: "#0f172a",
-              paper: "#f8fafc",
-              sand: "#f4ede3",
-              coral: "#fb7185",
-              teal: "#0f766e",
-              amber: "#f59e0b",
-            },
-            boxShadow: {
-              glow: "0 24px 80px rgba(15, 23, 42, 0.12)",
-            },
-          },
-        },
-      };
-    </script>
+    <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kanazawa: {
+                            red: '#9E2A2B',
+                            gold: '#C5A059',
+                            goldlight: '#F4E8C1',
+                            dark: '#1C1D21',
+                            slate: '#2D3142',
+                            washi: '#FAF8F5',
+                            card: '#FFFFFF',
+                            green: '#4A6B5D',
+                            blue: '#1B4965'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                        serif: ['"Zen Old Mincho"', 'serif']
+                    }
+                }
+            }
+        };
+    </script>
+
     <style>
-      :root {
-        color-scheme: light;
-      }
-      body {
-        background:
-          radial-gradient(circle at top left, rgba(251, 113, 133, 0.16), transparent 28%),
-          radial-gradient(circle at top right, rgba(15, 118, 110, 0.12), transparent 26%),
-          linear-gradient(180deg, #fffdf9 0%, #f7f3ec 100%);
-      }
-      .glass {
-        backdrop-filter: blur(16px);
-        background: rgba(255, 255, 255, 0.72);
-      }
-      .grain {
-        background-image:
-          linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-          radial-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px);
-        background-size: auto, 18px 18px;
-      }
+        body {
+            background-color: #FAF8F5;
+            color: #1C1D21;
+        }
+        .gold-border { border-color: #C5A059; }
+        .gold-gradient { background: linear-gradient(135deg, #C5A059 0%, #E2C982 50%, #B89243 100%); }
+        .red-gradient { background: linear-gradient(135deg, #9E2A2B 0%, #6E1A1B 100%); }
+        .blue-gradient { background: linear-gradient(135deg, #1B4965 0%, #2B5975 100%); }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #FAF8F5; }
+        ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 3px; }
     </style>
-  </head>
-  <body class="text-slate-800">
-    <main class="mx-auto min-h-screen max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
-      <section class="overflow-hidden rounded-[2rem] border border-white/70 shadow-glow">
-        <div class="grain relative">
-          <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.7),rgba(255,255,255,0.25))]"></div>
-          <div class="relative px-5 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
-            <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <div class="max-w-3xl space-y-4">
+</head>
+<body class="h-full flex flex-col font-sans antialiased selection:bg-kanazawa-goldlight selection:text-kanazawa-dark">
 
-                <div class="space-y-3">
-                  <h1 class="text-4xl font-semibold tracking-tight text-ink sm:text-5xl lg:text-6xl">
-                    台南自駕旅遊
-                    <span class="block text-teal-700">三天兩夜提案</span>
-                  </h1>
-                  <p class="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-                    以「淡水出發、台中休憩、台南過夜」為主軸的三天兩夜自駕慢旅，
-                    涵蓋奇美博物館特展、台南美食與市區散步，手機友善行程頁面。
-                  </p>
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-kanazawa-dark text-white shadow-md border-b-2 border-kanazawa-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand / Title -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center text-kanazawa-dark font-serif font-bold text-xl shadow-inner">
+                        南
+                    </div>
+                    <div>
+                        <h1 class="font-serif text-lg sm:text-xl font-bold tracking-wide text-kanazawa-goldlight">台南 • 自駕 • 三日慢旅紀行</h1>
+                        <p class="text-xs text-gray-400 hidden sm:block">2026/10/24 (六) - 2026/10/26 (一) 淡水出發・台中停靠・台南過夜</p>
+                    </div>
                 </div>
-              </div>
 
-              <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:min-w-[32rem]">
-                <div class="glass rounded-2xl border border-white/70 p-4 shadow-sm">
-                  <p class="text-xs uppercase tracking-[0.22em] text-slate-400">日期</p>
-                  <p class="mt-2 text-lg font-semibold text-ink">2026/10/24</p>
-                  <p class="text-sm text-slate-500">到 10/26</p>
+                <!-- Navigation Tabs (Desktop) -->
+                <nav class="hidden md:flex space-x-1" id="desktop-nav">
+                    <button onclick="switchTab('itinerary')" id="nav-itinerary" class="tab-btn active text-kanazawa-gold border-b-2 border-kanazawa-gold px-3 py-2 text-sm font-medium transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-map-location-dot"></i> 行程總覽
+                    </button>
+                    <button onclick="switchTab('navi')" id="nav-navi" class="tab-btn text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-route"></i> 導航清單
+                    </button>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="flex items-center space-x-2">
+                    <button onclick="window.print()" class="text-xs sm:text-sm bg-kanazawa-slate hover:bg-gray-700 text-white px-3 py-1.5 rounded-lg transition border border-gray-600 flex items-center gap-1.5">
+                        <i class="fa-solid fa-print"></i>
+                        <span class="hidden sm:inline">列印 / 匯出</span>
+                    </button>
                 </div>
-                <div class="glass rounded-2xl border border-white/70 p-4 shadow-sm">
-                  <p class="text-xs uppercase tracking-[0.22em] text-slate-400">主題</p>
-                  <p class="mt-2 text-lg font-semibold text-ink">自駕慢旅</p>
-                  <p class="text-sm text-slate-500">吃飯、散步、拍照</p>
-                </div>
-                <div class="glass rounded-2xl border border-white/70 p-4 shadow-sm">
-                  <p class="text-xs uppercase tracking-[0.22em] text-slate-400">中繼</p>
-                  <p class="mt-2 text-lg font-semibold text-ink">台中</p>
-                  <p class="text-sm text-slate-500">午餐＋休憩</p>
-                </div>
-                <div class="glass rounded-2xl border border-white/70 p-4 shadow-sm">
-                  <p class="text-xs uppercase tracking-[0.22em] text-slate-400">住宿</p>
-                  <p class="mt-2 text-lg font-semibold text-ink">台南一晚</p>
-                  <p class="text-sm text-slate-500">10/24 & 10/25</p>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Tab Navigation -->
-      <div class="mt-6" id="tab-nav">
-        <div class="flex gap-1 rounded-2xl border border-white/70 bg-white/70 p-1 shadow-sm" role="tablist">
-          <button class="tab-btn flex-1 rounded-xl px-4 py-2.5 text-sm font-medium transition-all" data-tab="overview" role="tab" aria-selected="true">
-            行程總覽
-          </button>
-          <button class="tab-btn flex-1 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-400 transition-all hover:text-slate-700" data-tab="navi" role="tab" aria-selected="false">
-            導航清單
-          </button>
-        </div>
-      </div>
-
-      <!-- Tab: 行程總覽 -->
-      <div id="tab-overview" class="tab-content">
-      <section class="mt-6 grid gap-6 lg:grid-cols-[1.35fr_0.85fr]">
-        <div class="space-y-6">
-          <article class="glass rounded-[1.75rem] border border-white/70 p-5 shadow-sm sm:p-6">
-            <div class="flex items-center justify-between gap-3">
-              <div>
-                <p class="text-xs font-semibold uppercase tracking-[0.3em] text-coral">行程總覽</p>
-                <h2 class="mt-2 text-2xl font-semibold text-ink">三天節奏</h2>
-              </div>
-
-            </div>
-
-            <div class="mt-5 grid gap-4 md:grid-cols-3">
-              <div class="rounded-3xl border border-slate-200 bg-white p-4">
-                <p class="text-sm font-medium text-slate-500">Day 1 · 10/24</p>
-                <h3 class="mt-2 text-lg font-semibold text-ink">淡水出發，台中停靠，夜宿台南</h3>
-                <ul class="mt-3 space-y-2 text-sm leading-6 text-slate-600">
-                  <li>07:30 前後出發，留一點早餐與整理時間。</li>
-                  <li>中午在台中找景點散步，接午餐與短暫休息。</li>
-                  <li>傍晚抵達台南，入住後安排簡單晚餐與散步。</li>
-                </ul>
-              </div>
-              <div class="rounded-3xl border border-slate-200 bg-white p-4">
-                <p class="text-sm font-medium text-slate-500">Day 2 · 10/25</p>
-                <h3 class="mt-2 text-lg font-semibold text-ink">奇美博物館＋埃及之王：法老特展</h3>
-                <ul class="mt-3 space-y-2 text-sm leading-6 text-slate-600">
-                  <li>上午安排奇美博物館，留足時間慢慢看展。</li>
-                  <li>重點行程放在「埃及之王：法老特展」，行程節奏以館內參觀為主。</li>
-                  <li>下午前往安南「四草綠色隧道」搭竹筏，傍晚再到「七股鹽山」看夕陽。</li>
-                </ul>
-              </div>
-              <div class="rounded-3xl border border-slate-200 bg-white p-4">
-                <p class="text-sm font-medium text-slate-500">Day 3 · 10/26</p>
-                <h3 class="mt-2 text-lg font-semibold text-ink">早餐後收拾回程</h3>
-                <ul class="mt-3 space-y-2 text-sm leading-6 text-slate-600">
-                  <li>早上先吃早餐、辦退房，再輕鬆上路。</li>
-                  <li>若體力夠，可加一個短停靠點再北返。</li>
-                  <li>回程盡量保留彈性，避免趕路太硬。</li>
-                </ul>
-              </div>
-            </div>
-          </article>
-
-          <article class="glass rounded-[1.75rem] border border-white/70 p-5 shadow-sm sm:p-6">
-            <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p class="text-xs font-semibold uppercase tracking-[0.3em] text-teal">路線安排</p>
-                <h2 class="mt-2 text-2xl font-semibold text-ink">建議駕車節點</h2>
-              </div>
-              <p class="text-sm text-slate-500">數字為粗估，實際依休息與路況調整</p>
-            </div>
-
-            <div class="mt-5 grid gap-4">
-              <div class="grid gap-4 md:grid-cols-[0.95fr_1.05fr]">
-                <div class="rounded-3xl bg-slate-900 p-5 text-white shadow-lg">
-                  <p class="text-xs uppercase tracking-[0.28em] text-slate-300">上午</p>
-                  <h3 class="mt-3 text-xl font-semibold">淡水 → 台中</h3>
-                  <p class="mt-3 text-sm leading-6 text-slate-300">
-                    先把北部出發的疲勞切成兩段，讓第一個大停靠點落在台中，
-                    比較符合自駕旅遊的節奏。
-                  </p>
-                  <div class="mt-4 flex flex-wrap gap-2 text-xs">
-                    <span class="rounded-full bg-white/10 px-3 py-1">車程長</span>
-                    <span class="rounded-full bg-white/10 px-3 py-1">建議休息 1 次</span>
-                    <span class="rounded-full bg-white/10 px-3 py-1">先吃早餐再上路</span>
-                  </div>
-                </div>
-                <div class="rounded-3xl border border-slate-200 bg-white p-5">
-                  <p class="text-xs uppercase tracking-[0.28em] text-slate-400">台中停靠建議</p>
-                  <h3 class="mt-3 text-xl font-semibold text-ink">景點＋午餐</h3>
-                  <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-600">
-                    <li><span class="font-medium text-ink">景點：</span>審計新村、草悟道、勤美綠園道，挑一個即可。</li>
-                    <li><span class="font-medium text-ink">午餐：</span>附近選一間簡單、好停車的餐廳，吃完再繼續南下。</li>
-                    <li><span class="font-medium text-ink">休息：</span>咖啡或甜點留給離開台中前的最後一站。</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="grid gap-4 md:grid-cols-3">
-                <div class="rounded-3xl border border-slate-200 bg-white p-5">
-                  <p class="text-xs uppercase tracking-[0.28em] text-slate-400">台南住宿</p>
-                  <h3 class="mt-3 text-lg font-semibold text-ink">南兜漫旅</h3>
-                  <p class="mt-3 text-sm leading-6 text-slate-600">
-                    先把住宿點固定在南兜漫旅，晚上回飯店休息的路線會更單純，隔天也方便接續台南市區活動。
-                  </p>
-                </div>
-                <div class="rounded-3xl border border-slate-200 bg-white p-5">
-                  <p class="text-xs uppercase tracking-[0.28em] text-slate-400">10/25</p>
-                  <h3 class="mt-3 text-lg font-semibold text-ink">奇美博物館＋四草・七股</h3>
-                  <p class="mt-3 text-sm leading-6 text-slate-600">
-                    上午看法老特展，下午南下安南四草綠色隧道搭竹筏，傍晚到七股鹽山看夕陽後再回市區晚餐。
-                  </p>
-                </div>
-                <div class="rounded-3xl border border-slate-200 bg-white p-5">
-                  <p class="text-xs uppercase tracking-[0.28em] text-slate-400">10/26</p>
-                  <h3 class="mt-3 text-lg font-semibold text-ink">回程前先補給</h3>
-                  <p class="mt-3 text-sm leading-6 text-slate-600">
-                    早上先早餐再退房，北返途中可視精神狀況決定是否再停一次。
-                  </p>
-                </div>
-              </div>
-            </div>
-          </article>
         </div>
 
-        <aside class="space-y-6">
-          <article class="glass rounded-[1.75rem] border border-white/70 p-5 shadow-sm sm:p-6">
-            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-amber-600">行前清單</p>
-            <h2 class="mt-2 text-2xl font-semibold text-ink">開車前確認</h2>
-            <div class="mt-4 space-y-3">
-              <label class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3">
-                <input type="checkbox" class="h-4 w-4 rounded border-slate-300 text-teal-600 focus:ring-teal-500" />
-                <span class="text-sm text-slate-700">車況、ETC、導航與手機充電線</span>
-              </label>
-              <label class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3">
-                <input type="checkbox" class="h-4 w-4 rounded border-slate-300 text-teal-600 focus:ring-teal-500" />
-                <span class="text-sm text-slate-700">住宿確認、停車資訊與退房時間</span>
-              </label>
-              <label class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3">
-                <input type="checkbox" class="h-4 w-4 rounded border-slate-300 text-teal-600 focus:ring-teal-500" />
-                <span class="text-sm text-slate-700">台中午餐備案與台南晚餐備案</span>
-              </label>
-              <label class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3">
-                <input type="checkbox" class="h-4 w-4 rounded border-slate-300 text-teal-600 focus:ring-teal-500" />
-                <span class="text-sm text-slate-700">雨備：室內景點、咖啡店、百貨公司</span>
-              </label>
-            </div>
-          </article>
+        <!-- Mobile Nav Bar -->
+        <div class="md:hidden flex border-t border-gray-800 bg-kanazawa-dark/95 backdrop-blur overflow-x-auto text-xs py-1">
+            <button onclick="switchTab('itinerary')" id="mob-nav-itinerary" class="flex-1 py-2 text-center text-kanazawa-gold border-b-2 border-kanazawa-gold font-medium whitespace-nowrap px-3">
+                <i class="fa-solid fa-map-location-dot block text-base mb-0.5"></i>行程
+            </button>
+            <button onclick="switchTab('navi')" id="mob-nav-navi" class="flex-1 py-2 text-center text-gray-400 font-medium whitespace-nowrap px-3">
+                <i class="fa-solid fa-route block text-base mb-0.5"></i>導航
+            </button>
+        </div>
+    </header>
 
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
 
-        </aside>
-      </section>
-      </div>
-
-      <!-- Tab: 導航清單 -->
-      <div id="tab-navi" class="tab-content hidden">
-        <section class="mt-6 space-y-5">
-          <article class="glass rounded-[1.75rem] border border-white/70 p-5 shadow-sm sm:p-6">
-
-            <!-- Day 1 -->
-            <div class="navi-day-header">
-              <span class="navi-day-badge">DAY 1</span>
-              <span class="navi-day-date">10/24（六）— 淡水 → 台中 → 台南</span>
-            </div>
-            <div class="navi-list">
-              <div class="navi-row"><span class="navi-time">07:00</span><span class="navi-loc">淡水（家）出發</span></div>
-              <div class="navi-row"><span class="navi-time">09:30</span><span class="navi-loc">湖口休息區</span></div>
-              <div class="navi-row"><span class="navi-time">12:00</span><span class="navi-loc">審計新村／草悟道（台中）</span></div>
-              <div class="navi-row"><span class="navi-time">12:30</span><span class="navi-loc">午餐（勤美商圈）</span></div>
-              <div class="navi-row"><span class="navi-time">14:00</span><span class="navi-loc">國道一號南下</span></div>
-              <div class="navi-row"><span class="navi-time">17:00</span><span class="navi-loc">南兜漫旅 Check-in（台南）</span></div>
-              <div class="navi-row"><span class="navi-time">18:30</span><span class="navi-loc">晚餐（中西區）</span></div>
-              <div class="navi-row"><span class="navi-time">20:00</span><span class="navi-loc">神農街／海安路散步</span></div>
+        <!-- Hero Summary Banner -->
+        <div class="mb-8 rounded-2xl overflow-hidden shadow-lg border border-kanazawa-gold/30 bg-white">
+            <div class="red-gradient text-white p-6 sm:p-8 relative">
+                <div class="absolute right-4 bottom-2 opacity-10 text-9xl font-serif select-none pointer-events-none">南</div>
+                <div class="relative z-10 max-w-3xl">
+                    <div class="inline-flex items-center gap-2 bg-black/30 border border-kanazawa-gold/50 px-3 py-1 rounded-full text-xs text-kanazawa-goldlight mb-3">
+                        <i class="fa-solid fa-car"></i> 自駕出發 • 住宿：南兜漫旅（台南）
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold tracking-tight mb-2">古都慢遊 • 奇美法老特展 • 四草綠隧與七股鹽山夕陽</h2>
+                    <p class="text-sm sm:text-base text-gray-200 leading-relaxed">
+                        淡水出發、台中休憩、台南過夜的三天兩夜自駕慢旅。奇美博物館看法老特展，下午搭竹筏遊四草綠色隧道，傍晚到七股鹽山看夕陽，晚上回市區吃美食散步！
+                    </p>
+                </div>
             </div>
 
-            <div class="navi-divider"></div>
-
-            <!-- Day 2 -->
-            <div class="navi-day-header">
-              <span class="navi-day-badge">DAY 2</span>
-              <span class="navi-day-date">10/25（日）— 奇美博物館＋四草・七股海岸</span>
+            <!-- Trip Quick Route Stats -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-gray-200 bg-kanazawa-washi border-t border-gray-200 text-xs sm:text-sm">
+                <div class="p-3 sm:p-4 text-center">
+                    <span class="block text-gray-500 font-bold">Day 1 (10/24 六)</span>
+                    <span class="font-bold text-kanazawa-red">淡水➔台中➔台南</span>
+                    <span class="block text-[11px] text-gray-500 mt-0.5">審計新村・神農街散步</span>
+                </div>
+                <div class="p-3 sm:p-4 text-center">
+                    <span class="block text-gray-500 font-bold">Day 2 (10/25 日)</span>
+                    <span class="font-bold text-kanazawa-green">奇美➔四草➔七股</span>
+                    <span class="block text-[11px] text-gray-500 mt-0.5">法老特展・綠色隧道・鹽山夕陽</span>
+                </div>
+                <div class="p-3 sm:p-4 text-center">
+                    <span class="block text-gray-500 font-bold">Day 3 (10/26 一)</span>
+                    <span class="font-bold text-kanazawa-blue">台南➔台中➔淡水</span>
+                    <span class="block text-[11px] text-gray-500 mt-0.5">回程保留彈性</span>
+                </div>
             </div>
-            <div class="navi-list">
-              <div class="navi-row"><span class="navi-time">08:30</span><span class="navi-loc">南兜漫旅早餐</span></div>
-              <div class="navi-row"><span class="navi-time">09:30</span><span class="navi-loc">前往奇美博物館</span></div>
-              <div class="navi-row"><span class="navi-time">10:00</span><span class="navi-loc">奇美博物館（法老特展）</span></div>
-              <div class="navi-row"><span class="navi-time">12:30</span><span class="navi-loc">午餐（奇美周邊）</span></div>
-              <div class="navi-row"><span class="navi-time">14:00</span><span class="navi-loc">四草綠色隧道（竹筏遊綠隧）</span></div>
-              <div class="navi-row"><span class="navi-time">16:00</span><span class="navi-loc">七股鹽山（看夕陽）</span></div>
-              <div class="navi-row"><span class="navi-time">18:30</span><span class="navi-loc">晚餐（台南市區）</span></div>
-              <div class="navi-row"><span class="navi-time">20:30</span><span class="navi-loc">回南兜漫旅</span></div>
+        </div>
+
+        <!-- ================= TAB 1: ITINERARY ================= -->
+        <section id="tab-itinerary" class="tab-content space-y-6">
+
+            <!-- Day Selection Filter Pills -->
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+                <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 w-full sm:w-auto">
+                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider mr-1">選擇天數:</span>
+                    <button onclick="filterDay('all')" id="day-btn-all" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-kanazawa-red text-white transition">全部天數</button>
+                    <button onclick="filterDay(1)" id="day-btn-1" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition">D1 (10/24 六)</button>
+                    <button onclick="filterDay(2)" id="day-btn-2" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition">D2 (10/25 日)</button>
+                    <button onclick="filterDay(3)" id="day-btn-3" class="day-filter-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition">D3 (10/26 一)</button>
+                </div>
+
+                <div class="flex items-center gap-3 text-xs text-gray-500">
+                    <span id="completed-count-badge" class="bg-kanazawa-goldlight text-kanazawa-dark font-bold px-2.5 py-1 rounded-full border border-kanazawa-gold">
+                        行程完成度: <span id="completed-val">0</span> / 6 打卡點
+                    </span>
+                </div>
             </div>
 
-            <div class="navi-divider"></div>
+            <!-- ITINERARY DAYS CONTAINER -->
+            <div class="space-y-8" id="days-container">
 
-            <!-- Day 3 -->
-            <div class="navi-day-header">
-              <span class="navi-day-badge">DAY 3</span>
-              <span class="navi-day-date">10/26（一）— 回程</span>
-            </div>
-            <div class="navi-list">
-              <div class="navi-row"><span class="navi-time">08:30</span><span class="navi-loc">南兜漫旅早餐</span></div>
-              <div class="navi-row"><span class="navi-time">10:00</span><span class="navi-loc">退房・北返</span></div>
-              <div class="navi-row"><span class="navi-time">12:00</span><span class="navi-loc">台中停靠（選配）</span></div>
-              <div class="navi-row"><span class="navi-time">16:00</span><span class="navi-loc">抵達淡水</span></div>
-            </div>
+                <!-- ACCOMMODATION -->
+                <aside class="bg-white rounded-2xl shadow-sm border border-kanazawa-gold/60 overflow-hidden" aria-label="南兜漫旅 住宿資訊">
+                    <div class="gold-gradient text-kanazawa-dark p-4 sm:p-5 flex items-center gap-3">
+                        <i class="fa-solid fa-hotel text-xl"></i>
+                        <div>
+                            <h3 class="font-serif text-lg sm:text-xl font-bold">住宿：南兜漫旅（台南）</h3>
+                            <p class="text-xs sm:text-sm">先把住宿點固定在南兜漫旅，晚上回飯店休息的路線會更單純，隔天也方便接續台南與海岸行程。</p>
+                        </div>
+                    </div>
+                    <div class="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-3 gap-5 text-sm text-gray-700">
+                        <section class="space-y-2">
+                            <h4 class="font-bold text-kanazawa-dark"><i class="fa-solid fa-key text-kanazawa-red"></i> Check-in</h4>
+                            <ul class="space-y-1.5 leading-relaxed">
+                                <li>• Day 1 預計 <strong>17:00</strong> 前後抵達台南办理入住。</li>
+                                <li>• 先放行李、簡單整理，再出門吃晚餐。</li>
+                                <li>• 退房時間請自行確認訂房通知。</li>
+                            </ul>
+                        </section>
+                        <section class="space-y-2">
+                            <h4 class="font-bold text-kanazawa-dark"><i class="fa-solid fa-car text-kanazawa-red"></i> 停車</h4>
+                            <ul class="space-y-1.5 leading-relaxed">
+                                <li>• 確認飯店有無停車位或附近停車場。</li>
+                                <li>• 市區散步日（神農街、海安路）建議車停飯店，走路逛最舒服。</li>
+                                <li>• 海岸日（四草、七股）再開車，距離都不遠。</li>
+                            </ul>
+                        </section>
+                        <section class="space-y-2">
+                            <h4 class="font-bold text-kanazawa-dark"><i class="fa-solid fa-circle-info text-kanazawa-red"></i> 周邊</h4>
+                            <ul class="space-y-1.5 leading-relaxed">
+                                <li>• 步行可到中西區晚餐與神農街、海安路商圈。</li>
+                                <li>• 隔天前往奇美博物館車程約 20 分鐘。</li>
+                                <li>• 前往四草、七股走台 17 線沿岸，風景好。</li>
+                            </ul>
+                        </section>
+                    </div>
+                </aside>
 
-            <!-- Map Container -->
-            <div class="navi-divider"></div>
-            <div class="mt-2">
-              <p class="text-xs font-semibold uppercase tracking-[0.3em] text-teal">路線地圖</p>
-              <h3 class="mt-1 mb-3 text-base font-semibold text-ink">三天行程總覽</h3>
-              <div id="travel-map" class="h-[400px] w-full rounded-2xl border border-slate-200 shadow-sm sm:h-[500px]"></div>
-            </div>
+                <!-- DAY 1 -->
+                <div class="day-card bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden" data-day="1">
+                    <div class="bg-kanazawa-slate text-white p-4 sm:p-5 flex items-center justify-between border-b-2 border-kanazawa-gold">
+                        <div class="flex items-center gap-3">
+                            <span class="bg-kanazawa-red text-white text-xs font-bold px-2.5 py-1 rounded">Day 1 • 2026/10/24 (六)</span>
+                            <h3 class="font-serif text-lg sm:text-xl font-bold">淡水 ➔ 台中停靠 ➔ 夜宿台南</h3>
+                        </div>
+                        <span class="text-xs bg-black/30 px-3 py-1 rounded-full text-kanazawa-goldlight"><i class="fa-solid fa-car-side"></i> 全天自駕</span>
+                    </div>
 
-          </article>
+                    <div class="p-4 sm:p-6 space-y-6">
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-red border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-red-100 text-red-800 px-2 py-0.5 rounded">07:00</span>
+                                <span class="text-xs text-gray-500">淡水（家）出發</span>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark">淡水出發 ➔ 國道南下</h4>
+                            <p class="text-sm text-gray-600">
+                                先把北部出發的疲勞切成兩段，讓第一個大停靠點落在台中，比較符合自駕旅遊的節奏。出發前先吃早餐、確認車況與 ETC。
+                            </p>
+                        </div>
+
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-gold border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded">09:30</span>
+                                <span class="text-xs text-gray-500">國道一號・湖口休息區</span>
+                           洗手
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark">湖口休息區短停</h4>
+                            <p class="text-sm text-gray-600">
+                                建議休息一次，伸展一下再上路，開車比較不會累。
+                            </p>
+                        </div>
+
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-gold border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded">12:00 - 12:30</span>
+                                <label class="inline-flex items-center gap-1.5 text-xs text-gray-500 cursor-pointer">
+                                    <input type="checkbox" onchange="toggleSpot()" id="d1-1" class="spot-checkbox rounded text-kanazawa-red focus:ring-kanazawa-red"> 打卡完成
+                                </label>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark flex items-center gap-2">
+                                <span>審計新村／草悟道 ➔ 午餐（勤美商圈）</span>
+                                <span class="text-xs bg-amber-100 text-amber-800 font-sans px-2 py-0.5 rounded">台中停靠</span>
+                            </h4>
+                            <p class="text-sm text-gray-600">
+                                審計新村、草悟道、勤美綠園道，挑一個即可。午餐在附近找一間簡單、好停車的餐廳，吃完再繼續南下；咖啡或甜點留給離開台中前的最後一站。
+                            </p>
+                        </div>
+
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-gold border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded">14:00 - 17:00</span>
+                                <span class="text-xs text-gray-500">國道一號南下</span>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark">台中 ➔ 台南</h4>
+                            <p class="text-sm text-gray-600">
+                                國道一號直接南下，預留塞車與休息時間，傍晚前抵達台南。
+                            </p>
+                        </div>
+
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-gold border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded">17:00 - 18:30</span>
+                                <span class="text-xs text-gray-500">南兜漫旅</span>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark">Check-in ➔ 晚餐（中西區）</h4>
+                            <p class="text-sm text-gray-600">
+                                入住南兜漫旅後，到中西區吃晚餐。台南的晚餐選擇多，熱炒、小吃、鍋物都有，看當天心情選。
+                            </p>
+                        </div>
+
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-gold border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded">20:00</span>
+                                <label class="inline-flex items-center gap-1.5 text-xs text-gray-500 cursor-pointer">
+                                    <input type="checkbox" onchange="toggleSpot()" id="d1-2" class="spot-checkbox rounded text-kanazawa-red focus:ring-kanazawa-red"> 打卡完成
+                                </label>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark">神農街／海安路散步</h4>
+                            <p class="text-sm text-gray-600">
+                                飯店附近就是神農街與海安路，晚上散步剛剛好，順便消化晚餐。早點回飯店休息，隔天要早起看展。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DAY 2 -->
+                <div class="day-card bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden" data-day="2">
+                    <div class="bg-kanazawa-slate text-white p-4 sm:p-5 flex items-center justify-between border-b-2 border-kanazawa-gold">
+                        <div class="flex items-center gap-3">
+                            <span class="bg-kanazawa-red text-white text-xs font-bold px-2.5 py-1 rounded">Day 2 • 2026/10/25 (日)</span>
+                            <h3 class="font-serif text-lg sm:text-xl font-bold">奇美博物館 ➔ 四草綠色隧道 ➔ 七股鹽山</h3>
+                        </div>
+                        <span class="text-xs bg-black/30 px-3 py-1 rounded-full text-kanazawa-goldlight"><i class="fa-solid fa-landmark"></i> 展覽＋海岸</span>
+                    </div>
+
+                    <div class="p-4 sm:p-6 space-y-6">
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-gold border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded">08:30 - 09:30</span>
+                                <span class="text-xs text-gray-500">南兜漫旅早餐 ➔ 出發</span>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark">早餐後前往奇美博物館</h4>
+                            <p class="text-sm text-gray-600">
+                                車程約 20 分鐘。早點出發，避开入館人潮。
+                            </p>
+                        </div>
+
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-red border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-red-100 text-red-800 px-2 py-0.5 rounded">10:00 - 12:30</span>
+                                <label class="inline-flex items-center gap-1.5 text-xs text-gray-500 cursor-pointer">
+                                    <input type="checkbox" onchange="toggleSpot()" id="d2-1" class="spot-checkbox rounded text-kanazawa-red focus:ring-kanazawa-red"> 打卡完成
+                                </label>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark flex items-center gap-2">
+                                <span>奇美博物館 ➔ 埃及之王：法老特展</span>
+                                <span class="text-xs bg-amber-100 text-amber-800 font-sans px-2 py-0.5 rounded">本日重點</span>
+                            </h4>
+                            <p class="text-sm text-gray-600">
+                                重點行程放在「埃及之王：法老特展」，留足時間慢慢看展。行程節奏以館內參觀為主，其他景點保持彈性，讓看展不會太趕。門票建議事先線上預約。
+                            </p>
+                        </div>
+
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-gold border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded">12:30</span>
+                                <span class="text-xs text-gray-500">奇美周邊</span>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark">午餐（奇美周邊）</h4>
+                            <p class="text-sm text-gray-600">
+                                看完展在奇美周邊吃午餐，補充體力後往海岸出發。
+                            </p>
+                        </div>
+
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-green border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">14:00 - 15:30</span>
+                                <label class="inline-flex items-center gap-1.5 text-xs text-gray-500 cursor-pointer">
+                                    <input type="checkbox" onchange="toggleSpot()" id="d2-2" class="spot-checkbox rounded text-kanazawa-red focus:ring-kanazawa-red"> 打卡完成
+                                </label>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark flex items-center gap-2">
+                                <span>四草綠色隧道（竹筏遊綠隧）</span>
+                                <span class="text-xs bg-emerald-100 text-emerald-800 font-sans px-2 py-0.5 rounded">安南區</span>
+                            </h4>
+                            <p class="text-sm text-gray-600">
+                                從奇美往安南區約 30 分鐘車程。在四草大眾廟旁搭乘竹筏，穿梭在紅樹林構成的「綠色隧道」中，被譽為「台版亞馬遜」。建議下午光線最美，記得防曬。
+                            </p>
+                        </div>
+
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-blue border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded">16:00 - 17:30</span>
+                                <label class="inline-flex items-center gap-1.5 text-xs text-gray-500 cursor-pointer">
+                                    <input type="checkbox" onchange="toggleSpot()" id="d2-3" class="spot-checkbox rounded text-kanazawa-red focus:ring-kanazawa-red"> 打卡完成
+                                </label>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark flex items-center gap-2">
+                                <span>七股鹽山（看夕陽）</span>
+                                <span class="text-xs bg-sky-100 text-sky-800 font-sans px-2 py-0.5 rounded">七股區</span>
+                            </h4>
+                            <p class="text-sm text-gray-600">
+                                從四草往七股約 20 分鐘車程。爬上鹽山眺望七股海岸，傍晚時分的夕陽是最大看點。風大記得帶件外套，鹽山地面較滑請小心行走。
+                            </p>
+                        </div>
+
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-gold border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded">18:30 - 20:30</span>
+                                <span class="text-xs text-gray-500">台南市區 ➔ 回南兜漫旅</span>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark">晚餐（台南市區）➔ 回飯店</h4>
+                            <p class="text-sm text-gray-600">
+                                看完夕陽開回市區晚餐，飽餐一頓後回南兜漫旅休息。今天走了海岸線，早點睡。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DAY 3 -->
+                <div class="day-card bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden" data-day="3">
+                    <div class="bg-kanazawa-slate text-white p-4 sm:p-5 flex items-center justify-between border-b-2 border-kanazawa-gold">
+                        <div class="flex items-center gap-3">
+                            <span class="bg-kanazawa-red text-white text-xs font-bold px-2.5 py-1 rounded">Day 3 • 2026/10/26 (一)</span>
+                            <h3 class="font-serif text-lg sm:text-xl font-bold">早餐後收拾回程</h3>
+                        </div>
+                        <span class="text-xs bg-black/30 px-3 py-1 rounded-full text-kanazawa-goldlight"><i class="fa-solid fa-house"></i> 北返淡水</span>
+                    </div>
+
+                    <div class="p-4 sm:p-6 space-y-6">
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-gold border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded">08:30 - 10:00</span>
+                                <span class="text-xs text-gray-500">南兜漫旅</span>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark">早餐 ➔ 辦退房</h4>
+                            <p class="text-sm text-gray-600">
+                                早上先吃早餐、辦退房，再輕鬆上路。退房前確認房間東西沒漏拿。
+                            </p>
+                        </div>
+
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-gold border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-gray-100 text-gray-700 px-2 py-0.5 rounded">10:00 - 12:00</span>
+                                <label class="inline-flex items-center gap-1.5 text-xs text-gray-500 cursor-pointer">
+                                    <input type="checkbox" onchange="toggleSpot()" id="d3-1" class="spot-checkbox rounded text-kanazawa-red focus:ring-kanazawa-red"> 打卡完成
+                                </label>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark">台中停靠（選配）➔ 北返</h4>
+                            <p class="text-sm text-gray-600">
+                                若體力夠，回程可在台中再停一次補給午餐；若想直接回家就國道一號一路北上。回程盡量保留彈性，避免趕路太硬。
+                            </p>
+                        </div>
+
+                        <div class="relative pl-8 border-l-2 border-kanazawa-gold/50 space-y-2">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-kanazawa-red border-2 border-white"></div>
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <span class="text-xs font-bold bg-red-100 text-red-800 px-2 py-0.5 rounded">16:00</span>
+                                <span class="text-xs text-gray-500">淡水</span>
+                            </div>
+                            <h4 class="font-serif font-bold text-lg text-kanazawa-dark">抵達淡水，行程結束</h4>
+                            <p class="text-sm text-gray-600">
+                                預計下午四點前後回到淡水，三天兩夜的台南慢旅畫下句點。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROUTE SUMMARY -->
+                <aside class="bg-white rounded-2xl shadow-sm border border-kanazawa-gold/60 overflow-hidden" aria-label="路線安排">
+                    <div class="blue-gradient text-white p-4 sm:p-5 flex items-center gap-3">
+                        <i class="fa-solid fa-road text-xl"></i>
+                        <div>
+                            <h3 class="font-serif text-lg sm:text-xl font-bold">路線安排</h3>
+                            <p class="text-xs sm:text-sm text-gray-200">數字為粗估，實際依休息與路況調整</p>
+                        </div>
+                    </div>
+                    <div class="p-4 sm:p-6 grid grid-cols-1 md:grid-cols-3 gap-5 text-sm text-gray-700">
+                        <section class="space-y-2">
+                            <h4 class="font-bold text-kanazawa-dark"><i class="fa-solid fa-location-arrow text-kanazawa-red"></i> Day 1 淡水➔台中➔台南</h4>
+                            <ul class="space-y-1.5 leading-relaxed">
+                                <li>• 國道一號為主幹，台中停靠吃午餐。</li>
+                                <li>• 建議休息一次，避免疲勞駕駛。</li>
+                                <li>• 傍晚前抵達台南 Check-in。</li>
+                            </ul>
+                        </section>
+                        <section class="space-y-2">
+                            <h4 class="font-bold text-kanazawa-dark"><i class="fa-solid fa-water text-kanazawa-red"></i> Day 2 海岸線</h4>
+                            <ul class="space-y-1.5 leading-relaxed">
+                                <li>• 奇美➔四草（約 30 分）➔七股（約 20 分）。</li>
+                                <li>• 走台 17 線沿岸，風景好。</li>
+                                <li>• 夕陽時段在七股，回市區約 50 分。</li>
+                            </ul>
+                        </section>
+                        <section class="space-y-2">
+                            <h4 class="font-bold text-kanazawa-dark"><i class="fa-solid fa-flag-checkered text-kanazawa-red"></i> Day 3 回程</h4>
+                            <ul class="space-y-1.5 leading-relaxed">
+                                <li>• 早上退房後出發，台中可選配停靠。</li>
+                                <li>• 國道一號北上回淡水。</li>
+                                <li>• 保留彈性，不排死時間。</li>
+                            </ul>
+                        </section>
+                    </div>
+                </aside>
+
+                <!-- CHECKLIST -->
+                <aside class="bg-white rounded-2xl shadow-sm border border-kanazawa-gold/60 overflow-hidden" aria-label="行前清單">
+                    <div class="gold-gradient text-kanazawa-dark p-4 sm:p-5 flex items-center gap-3">
+                        <i class="fa-solid fa-clipboard-check text-xl"></i>
+                        <div>
+                            <h3 class="font-serif text-lg sm:text-xl font-bold">行前清單：開車前確認</h3>
+                            <p class="text-xs sm:text-sm">出發前過一遍，旅途更安心</p>
+                        </div>
+                    </div>
+                    <div class="p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <label class="flex items-center gap-3 rounded-xl border border-gray-200 bg-kanazawa-washi px-4 py-3 cursor-pointer hover:border-kanazawa-gold transition">
+                            <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-kanazawa-red focus:ring-kanazawa-red" />
+                            <span class="text-sm text-gray-700">車況、ETC、導航與手機充電線</span>
+                        </label>
+                        <label class="flex items-center gap-3 rounded-xl border border-gray-200 bg-kanazawa-washi px-4 py-3 cursor-pointer hover:border-kanazawa-gold transition">
+                            <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-kanazawa-red focus:ring-kanazawa-red" />
+                            <span class="text-sm text-gray-700">住宿確認、停車資訊與退房時間</span>
+                        </label>
+                        <label class="flex items-center gap-3 rounded-xl border border-gray-200 bg-kanazawa-washi px-4 py-3 cursor-pointer hover:border-kanazawa-gold transition">
+                            <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-kanazawa-red focus:ring-kanazawa-red" />
+                            <span class="text-sm text-gray-700">台中午餐備案與台南晚餐備案</span>
+                        </label>
+                        <label class="flex items-center gap-3 rounded-xl border border-gray-200 bg-kanazawa-washi px-4 py-3 cursor-pointer hover:border-kanazawa-gold transition">
+                            <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-kanazawa-red focus:ring-kanazawa-red" />
+                            <span class="text-sm text-gray-700">雨備：室內景點、咖啡店、百貨公司</span>
+                        </label>
+                        <label class="flex items-center gap-3 rounded-xl border border-gray-200 bg-kanazawa-washi px-4 py-3 cursor-pointer hover:border-kanazawa-gold transition sm:col-span-2">
+                            <input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-kanazawa-red focus:ring-kanazawa-red" />
+                            <span class="text-sm text-gray-700">四草竹筏與七股鹽山：防曬、帽子、外套（海岸風大）</span>
+                        </label>
+                    </div>
+                </aside>
+
+            </div>
         </section>
-      </div>
+
+        <!-- ================= TAB 2: NAVI LIST ================= -->
+        <section id="tab-navi" class="tab-content hidden space-y-6">
+            <article class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="bg-kanazawa-slate text-white p-4 sm:p-5 flex items-center gap-3 border-b-2 border-kanazawa-gold">
+                    <i class="fa-solid fa-route text-xl text-kanazawa-goldlight"></i>
+                    <div>
+                        <h3 class="font-serif text-lg sm:text-xl font-bold">導航清單</h3>
+                        <p class="text-xs text-gray-300">三天時序一覽，手機上看這個最方便</p>
+                    </div>
+                </div>
+
+                <div class="p-4 sm:p-6">
+                    <!-- Day 1 -->
+                    <div class="navi-day-header">
+                        <span class="navi-day-badge">DAY 1</span>
+                        <span class="navi-day-date">10/24（六）— 淡水 ➔ 台中 ➔ 台南</span>
+                    </div>
+                    <div class="navi-list">
+                        <div class="navi-row"><span class="navi-time">07:00</span><span class="navi-loc">淡水（家）出發</span></div>
+                        <div class="navi-row"><span class="navi-time">09:30</span><span class="navi-loc">湖口休息區</span></div>
+                        <div class="navi-row"><span class="navi-time">12:00</span><span class="navi-loc">審計新村／草悟道（台中）</span></div>
+                        <div class="navi-row"><span class="navi-time">12:30</span><span class="navi-loc">午餐（勤美商圈）</span></div>
+                        <div class="navi-row"><span class="navi-time">14:00</span><span class="navi-loc">國道一號南下</span></div>
+                        <div class="navi-row"><span class="navi-time">17:00</span><span class="navi-loc">南兜漫旅 Check-in（台南）</span></div>
+                        <div class="navi-row"><span class="navi-time">18:30</span><span class="navi-loc">晚餐（中西區）</span></div>
+                        <div class="navi-row"><span class="navi-time">20:00</span><span class="navi-loc">神農街／海安路散步</span></div>
+                    </div>
+
+                    <div class="navi-divider"></div>
+
+                    <!-- Day 2 -->
+                    <div class="navi-day-header">
+                        <span class="navi-day-badge">DAY 2</span>
+                        <span class="navi-day-date">10/25（日）— 奇美博物館 ➔ 四草・七股海岸</span>
+                    </div>
+                    <div class="navi-list">
+                        <div class="navi-row"><span class="navi-time">08:30</span><span class="navi-loc">南兜漫旅早餐</span></div>
+                        <div class="navi-row"><span class="navi-time">09:30</span><span class="navi-loc">前往奇美博物館</span></div>
+                        <div class="navi-row"><span class="navi-time">10:00</span><span class="navi-loc">奇美博物館（法老特展）</span></div>
+                        <div class="navi-row"><span class="navi-time">12:30</span><span class="navi-loc">午餐（奇美周邊）</span></div>
+                        <div class="navi-row"><span class="navi-time">14:00</span><span class="navi-loc">四草綠色隧道（竹筏遊綠隧）</span></div>
+                        <div class="navi-row"><span class="navi-time">16:00</span><span class="navi-loc">七股鹽山（看夕陽）</span></div>
+                        <div class="navi-row"><span class="navi-time">18:30</span><span class="navi-loc">晚餐（台南市區）</span></div>
+                        <div class="navi-row"><span class="navi-time">20:30</span><span class="navi-loc">回南兜漫旅</span></div>
+                    </div>
+
+                    <div class="navi-divider"></div>
+
+                    <!-- Day 3 -->
+                    <div class="navi-day-header">
+                        <span class="navi-day-badge">DAY 3</span>
+                        <span class="navi-day-date">10/26（一）— 回程</span>
+                    </div>
+                    <div class="navi-list">
+                        <div class="navi-row"><span class="navi-time">08:30</span><span class="navi-loc">南兜漫旅早餐</span></div>
+                        <div class="navi-row"><span class="navi-time">10:00</span><span class="navi-loc">退房・北返（台中停靠選配）</span></div>
+                        <div class="navi-row"><span class="navi-time">16:00</span><span class="navi-loc">抵達淡水</span></div>
+                    </div>
+
+                    <!-- Map Container -->
+                    <div class="navi-divider"></div>
+                    <div class="mt-2">
+                        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-kanazawa-red">路線地圖</p>
+                        <h3 class="mt-1 mb-3 text-base font-semibold text-kanazawa-dark font-serif">三天行程總覽</h3>
+                        <div id="travel-map" class="h-[400px] w-full rounded-2xl border border-gray-200 shadow-sm sm:h-[500px]"></div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
     </main>
-  <style>
-    .tab-btn[aria-selected="true"] { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-    .navi-day-header { display: flex; align-items: baseline; gap: 0.75rem; padding: 24px 0 12px; }
-    .navi-day-header:first-of-type { padding-top: 4px; }
-    .navi-day-badge { font-weight: 700; font-size: 0.78rem; color: #0f766e; letter-spacing: 0.08em; }
-    .navi-day-date { font-size: 0.82rem; color: #94a3b8; }
-    .navi-list { display: flex; flex-direction: column; }
-    .navi-row { display: flex; align-items: baseline; gap: 0.75rem; padding: 8px 0; }
-    .navi-row + .navi-row { border-top: 1px solid rgba(0,0,0,0.04); }
-    .navi-time { font-variant-numeric: tabular-nums; min-width: 2.8rem; font-weight: 600; font-size: 0.9rem; color: #0f172a; }
-    .navi-loc { color: #475569; font-size: 0.9rem; }
-    .navi-divider { height: 1px; background: linear-gradient(90deg, #0f766e30 0%, transparent 100%); margin: 8px 0; }
-  </style>
-  <script>
-    let mapInitialized = false;
-    let travelMap = null;
 
-    function initTravelMap() {
-      if (mapInitialized) return;
-      mapInitialized = true;
+    <!-- Footer -->
+    <footer class="bg-kanazawa-dark text-gray-400 text-center text-xs py-6 mt-8 border-t-2 border-kanazawa-gold">
+        <p>台南自駕三日慢旅 • 2026/10/24-10/26 • 行程會依天氣與體力彈性調整</p>
+    </footer>
 
-      travelMap = L.map('travel-map', {
-        zoomControl: true,
-        scrollWheelZoom: true
-      });
+    <style>
+        .navi-day-header { display: flex; align-items: baseline; gap: 0.75rem; padding: 24px 0 12px; }
+        .navi-day-header:first-of-type { padding-top: 4px; }
+        .navi-day-badge { font-weight: 700; font-size: 0.78rem; color: #9E2A2B; letter-spacing: 0.08em; font-family: 'Zen Old Mincho', serif; }
+        .navi-day-date { font-size: 0.82rem; color: #94a3b8; }
+        .navi-list { display: flex; flex-direction: column; }
+        .navi-row { display: flex; align-items: baseline; gap: 0.75rem; padding: 8px 0; }
+        .navi-row + .navi-row { border-top: 1px solid rgba(0,0,0,0.04); }
+        .navi-time { font-variant-numeric: tabular-nums; min-width: 2.8rem; font-weight: 600; font-size: 0.9rem; color: #1C1D21; }
+        .navi-loc { color: #475569; font-size: 0.9rem; }
+        .navi-divider { height: 1px; background: linear-gradient(90deg, #C5A05960 0%, transparent 100%); margin: 8px 0; }
+    </style>
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 19
-      }).addTo(travelMap);
+    <script>
+        /* ================= Tab Switching ================= */
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
 
-      const dayColors = { 1: '#fb7185', 2: '#0f766e', 3: '#f59e0b' };
-      const dayLabels = { 1: 'Day 1 &middot; 10/24', 2: 'Day 2 &middot; 10/25', 3: 'Day 3 &middot; 10/26' };
+            // Desktop nav
+            const navButtons = document.querySelectorAll('#desktop-nav .tab-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('text-kanazawa-gold', 'border-b-2', 'border-kanazawa-gold', 'active');
+                btn.classList.add('text-gray-300');
+            });
+            const activeBtn = document.getElementById('nav-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-gray-300');
+                activeBtn.classList.add('text-kanazawa-gold', 'border-b-2', 'border-kanazawa-gold', 'active');
+            }
 
-      const spots = [
-        { day:1, time:'07:00', name:'淡水（家）出發',            lat:25.1813, lng:121.4531 },
-        { day:1, time:'09:30', name:'湖口休息區',                lat:24.8610, lng:121.0120 },
-        { day:1, time:'12:00', name:'審計新村／草悟道（台中）',  lat:24.1434, lng:120.6642 },
-        { day:1, time:'12:30', name:'午餐（勤美商圈）',          lat:24.1508, lng:120.6632 },
-        { day:1, time:'17:00', name:'南兜漫旅 Check-in',         lat:22.9940, lng:120.1984 },
-        { day:1, time:'20:00', name:'神農街／海安路散步',        lat:22.9976, lng:120.1966 },
-        { day:2, time:'08:30', name:'南兜漫旅早餐',              lat:22.9940, lng:120.1984 },
-        { day:2, time:'10:00', name:'奇美博物館（法老特展）',    lat:22.9348, lng:120.2261 },
-        { day:2, time:'12:30', name:'午餐（奇美周邊）',          lat:22.9340, lng:120.2250 },
-        { day:2, time:'14:00', name:'四草綠色隧道',              lat:23.0730, lng:120.1965 },
-        { day:2, time:'16:00', name:'七股鹽山（看夕陽）',        lat:23.1236, lng:120.0900 },
-        { day:2, time:'20:30', name:'回南兜漫旅',                lat:22.9940, lng:120.1984 },
-        { day:3, time:'08:30', name:'南兜漫旅早餐',              lat:22.9940, lng:120.1984 },
-        { day:3, time:'10:00', name:'退房・北返',                lat:22.9940, lng:120.1984 },
-        { day:3, time:'16:00', name:'抵達淡水',                  lat:25.1813, lng:121.4531 },
-      ];
+            // Mobile nav
+            const mobButtons = document.querySelectorAll('.md\\:hidden button');
+            mobButtons.forEach(btn => {
+                btn.classList.remove('text-kanazawa-gold', 'border-b-2', 'border-kanazawa-gold');
+                btn.classList.add('text-gray-400');
+            });
+            const activeMobBtn = document.getElementById('mob-nav-' + tabId);
+            if (activeMobBtn) {
+                activeMobBtn.classList.remove('text-gray-400');
+                activeMobBtn.classList.add('text-kanazawa-gold', 'border-b-2', 'border-kanazawa-gold');
+            }
 
-      function createIcon(day, idx, total) {
-        const color = dayColors[day];
-        const size = idx === 0 || idx === total - 1 ? 14 : 10;
-        const label = idx === 0 ? 'S' : idx === total - 1 ? 'E' : '';
-        return L.divIcon({
-          className: 'custom-marker',
-          html: `<div style="width:${size*2}px;height:${size*2}px;background:${color};border:2px solid white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:white;">${label}</div>`,
-          iconSize: [size*2, size*2],
-          iconAnchor: [size, size],
-          popupAnchor: [0, -size-4]
-        });
-      }
+            // 地圖需在可見狀態下才能正確計算尺寸
+            if (tabId === 'navi') {
+                initTravelMap();
+                setTimeout(() => { if (travelMap) travelMap.invalidateSize(); }, 100);
+            }
 
-      const allPoints = [];
-      for (let d = 1; d <= 3; d++) {
-        const daySpots = spots.filter(s => s.day === d);
-        const points = daySpots.map(s => [s.lat, s.lng]);
-        allPoints.push(...points);
-
-        if (points.length > 1) {
-          L.polyline(points, {
-            color: dayColors[d], weight: 3, opacity: 0.55,
-            dashArray: d === 3 ? '8,6' : ''
-          }).addTo(travelMap);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        daySpots.forEach((s, i) => {
-          const icon = createIcon(d, i, daySpots.length);
-          const marker = L.marker([s.lat, s.lng], { icon }).addTo(travelMap);
-          marker.bindPopup(`<strong style="color:${dayColors[d]};">${dayLabels[d]}</strong><br/><span style="font-size:0.85rem;">\uD83D\uDD50 ${s.time}</span><br/><span style="font-size:0.9rem;">\uD83D\uDCCD ${s.name}</span>`);
-        });
-      }
+        /* ================= Day Filter ================= */
+        function filterDay(dayNum) {
+            const cards = document.querySelectorAll('.day-card');
+            const btns = document.querySelectorAll('.day-filter-btn');
 
-      if (allPoints.length > 0) {
-        travelMap.fitBounds(allPoints, { padding: [40, 40] });
-      }
+            btns.forEach(btn => {
+                btn.classList.remove('bg-kanazawa-red', 'text-white');
+                btn.classList.add('bg-gray-100', 'text-gray-700');
+            });
 
-      const legend = L.control({ position: 'bottomleft' });
-      legend.onAdd = function() {
-        const div = L.DomUtil.create('div', 'map-legend');
-        div.innerHTML = '<div style="background:white;padding:6px 10px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.12);font-size:0.75rem;line-height:1.6;"><div><span style="display:inline-block;width:10px;height:3px;background:#fb7185;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Day 1</div><div><span style="display:inline-block;width:10px;height:3px;background:#0f766e;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Day 2</div><div><span style="display:inline-block;width:10px;height:3px;background:#f59e0b;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Day 3（回程）</div></div>';
-        return div;
-      };
-      legend.addTo(travelMap);
-    }
-
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => {
-          b.setAttribute('aria-selected', 'false');
-          b.classList.remove('bg-white', 'text-ink', 'shadow-sm');
-          b.classList.add('text-slate-400');
-        });
-        btn.setAttribute('aria-selected', 'true');
-        btn.classList.add('bg-white', 'text-ink', 'shadow-sm');
-        btn.classList.remove('text-slate-400');
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-        const tab = document.getElementById('tab-' + btn.dataset.tab);
-        tab.classList.remove('hidden');
-        // 如果切到導航清單，初始化地圖（需在可見狀態下才能正確計算尺寸）
-        if (btn.dataset.tab === 'navi') {
-          initTravelMap();
-          // 確保地圖正確渲染
-          setTimeout(() => { if (travelMap) travelMap.invalidateSize(); }, 100);
+            if (dayNum === 'all') {
+                cards.forEach(card => card.classList.remove('hidden'));
+                document.getElementById('day-btn-all').classList.remove('bg-gray-100', 'text-gray-700');
+                document.getElementById('day-btn-all').classList.add('bg-kanazawa-red', 'text-white');
+            } else {
+                cards.forEach(card => {
+                    if (card.getAttribute('data-day') == dayNum) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+                const activeBtn = document.getElementById('day-btn-' + dayNum);
+                if (activeBtn) {
+                    activeBtn.classList.remove('bg-gray-100', 'text-gray-700');
+                    activeBtn.classList.add('bg-kanazawa-red', 'text-white');
+                }
+            }
         }
-      });
-    });
-  </script>
-  </body>
+
+        /* ================= Spot Progress (localStorage) ================= */
+        const progressStorageKey = 'tainan-2026-spot-progress';
+
+        function toggleSpot() {
+            saveProgress();
+            updateProgress();
+        }
+
+        function saveProgress() {
+            const progress = {};
+            document.querySelectorAll('.spot-checkbox').forEach(checkbox => {
+                progress[checkbox.id] = checkbox.checked;
+            });
+            localStorage.setItem(progressStorageKey, JSON.stringify(progress));
+        }
+
+        function restoreProgress() {
+            try {
+                const progress = JSON.parse(localStorage.getItem(progressStorageKey) || '{}');
+                document.querySelectorAll('.spot-checkbox').forEach(checkbox => {
+                    checkbox.checked = Boolean(progress[checkbox.id]);
+                });
+            } catch (_) {
+                localStorage.removeItem(progressStorageKey);
+            }
+        }
+
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.spot-checkbox');
+            let completed = 0;
+            checkboxes.forEach(cb => {
+                if (cb.checked) completed++;
+            });
+            const valSpan = document.getElementById('completed-val');
+            if (valSpan) valSpan.innerText = completed;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            restoreProgress();
+            updateProgress();
+        });
+
+        /* ================= Travel Map (Leaflet) ================= */
+        let mapInitialized = false;
+        let travelMap = null;
+
+        function initTravelMap() {
+            if (mapInitialized) return;
+            mapInitialized = true;
+
+            travelMap = L.map('travel-map', {
+                zoomControl: true,
+                scrollWheelZoom: true
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                maxZoom: 19
+            }).addTo(travelMap);
+
+            const dayColors = { 1: '#9E2A2B', 2: '#4A6B5D', 3: '#1B4965' };
+            const dayLabels = { 1: 'Day 1 &middot; 10/24', 2: 'Day 2 &middot; 10/25', 3: 'Day 3 &middot; 10/26' };
+
+            const spots = [
+                { day:1, time:'07:00', name:'淡水（家）出發',            lat:25.1813, lng:121.4531 },
+                { day:1, time:'09:30', name:'湖口休息區',                lat:24.8610, lng:121.0120 },
+                { day:1, time:'12:00', name:'審計新村／草悟道（台中）',  lat:24.1434, lng:120.6642 },
+                { day:1, time:'12:30', name:'午餐（勤美商圈）',          lat:24.1508, lng:120.6632 },
+                { day:1, time:'17:00', name:'南兜漫旅 Check-in',         lat:22.9940, lng:120.1984 },
+                { day:1, time:'20:00', name:'神農街／海安路散步',        lat:22.9976, lng:120.1966 },
+                { day:2, time:'08:30', name:'南兜漫旅早餐',              lat:22.9940, lng:120.1984 },
+                { day:2, time:'10:00', name:'奇美博物館（法老特展）',    lat:22.9348, lng:120.2261 },
+                { day:2, time:'12:30', name:'午餐（奇美周邊）',          lat:22.9340, lng:120.2250 },
+                { day:2, time:'14:00', name:'四草綠色隧道',              lat:23.0730, lng:120.1965 },
+                { day:2, time:'16:00', name:'七股鹽山（看夕陽）',        lat:23.1236, lng:120.0900 },
+                { day:2, time:'20:30', name:'回南兜漫旅',                lat:22.9940, lng:120.1984 },
+                { day:3, time:'08:30', name:'南兜漫旅早餐',              lat:22.9940, lng:120.1984 },
+                { day:3, time:'10:00', name:'退房・北返',                lat:22.9940, lng:120.1984 },
+                { day:3, time:'16:00', name:'抵達淡水',                  lat:25.1813, lng:121.4531 },
+            ];
+
+            function createIcon(day, idx, total) {
+                const color = dayColors[day];
+                const size = idx === 0 || idx === total - 1 ? 14 : 10;
+                const label = idx === 0 ? 'S' : idx === total - 1 ? 'E' : '';
+                return L.divIcon({
+                    className: 'custom-marker',
+                    html: `<div style="width:${size*2}px;height:${size*2}px;background:${color};border:2px solid white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:white;">${label}</div>`,
+                    iconSize: [size*2, size*2],
+                    iconAnchor: [size, size],
+                    popupAnchor: [0, -size-4]
+                });
+            }
+
+            const allPoints = [];
+            for (let d = 1; d <= 3; d++) {
+                const daySpots = spots.filter(s => s.day === d);
+                const points = daySpots.map(s => [s.lat, s.lng]);
+                allPoints.push(...points);
+
+                if (points.length > 1) {
+                    L.polyline(points, {
+                        color: dayColors[d], weight: 3, opacity: 0.55,
+                        dashArray: d === 3 ? '8,6' : ''
+                    }).addTo(travelMap);
+                }
+
+                daySpots.forEach((s, i) => {
+                    const icon = createIcon(d, i, daySpots.length);
+                    const marker = L.marker([s.lat, s.lng], { icon }).addTo(travelMap);
+                    marker.bindPopup(`<strong style="color:${dayColors[d]};">${dayLabels[d]}</strong><br/><span style="font-size:0.85rem;">\uD83D\uDD50 ${s.time}</span><br/><span style="font-size:0.9rem;">\uD83D\uDCCD ${s.name}</span>`);
+                });
+            }
+
+            if (allPoints.length > 0) {
+                travelMap.fitBounds(allPoints, { padding: [40, 40] });
+            }
+
+            const legend = L.control({ position: 'bottomleft' });
+            legend.onAdd = function() {
+                const div = L.DomUtil.create('div', 'map-legend');
+                div.innerHTML = '<div style="background:white;padding:6px 10px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.12);font-size:0.75rem;line-height:1.6;"><div><span style="display:inline-block;width:10px;height:3px;background:#9E2A2B;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Day 1</div><div><span style="display:inline-block;width:10px;height:3px;background:#4A6B5D;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Day 2</div><div><span style="display:inline-block;width:10px;height:3px;background:#1B4965;border-radius:2px;margin-right:6px;vertical-align:middle;"></span>Day 3（回程）</div></div>';
+                return div;
+            };
+            legend.addTo(travelMap);
+        }
+    </script>
+</body>
 </html>

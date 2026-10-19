@@ -79,6 +79,9 @@
                     <button onclick="switchTab('navi')" id="nav-navi" class="tab-btn text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors flex items-center gap-2">
                         <i class="fa-solid fa-route"></i> 導航清單
                     </button>
+                    <button onclick="switchTab('rain')" id="nav-rain" class="tab-btn text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-umbrella"></i> 雨備專區
+                    </button>
                 </nav>
 
                 <!-- Action Button -->
@@ -98,6 +101,9 @@
             </button>
             <button onclick="switchTab('navi')" id="mob-nav-navi" class="flex-1 py-2 text-center text-gray-400 font-medium whitespace-nowrap px-3">
                 <i class="fa-solid fa-route block text-base mb-0.5"></i>導航
+            </button>
+            <button onclick="switchTab('rain')" id="mob-nav-rain" class="flex-1 py-2 text-center text-gray-400 font-medium whitespace-nowrap px-3">
+                <i class="fa-solid fa-umbrella block text-base mb-0.5"></i>雨備
             </button>
         </div>
     </header>
@@ -589,6 +595,69 @@
                     </div>
                 </div>
             </article>
+        </section>
+
+        <!-- Rain alternatives: optional, not booked itinerary stops -->
+        <section id="tab-rain" class="tab-content hidden space-y-6" aria-labelledby="rain-title">
+            <div class="blue-gradient rounded-2xl p-6 text-white">
+                <h3 id="rain-title" class="font-serif text-2xl font-bold mb-3"><i class="fa-solid fa-umbrella"></i> 台南雨備專區</h3>
+                <p class="text-sm leading-relaxed">雨天改逛室內景點，或預約手作體驗。以下皆為備選，未加入正式行程，也不代表已訂位。</p>
+            </div>
+            <aside class="bg-white border border-kanazawa-gold rounded-xl p-5 text-sm space-y-2">
+                <p><strong>怎麼替換：</strong>10/25 保留 10:15 法老展快速入場與 13:00 點爭鮮仁德店訂位；下午若下雨，可從室內景點或手作課程擇一，替代四草（可選）與七股，不必全部塞入。</p>
+                <p><strong>晚上：</strong>花園夜市是戶外行程，若雨勢大，改在室內用餐，不勉強逛夜市。</p>
+                <p><strong>資料狀態（2026/10/19 整理）：</strong>最新營業時間、價格、課程與可訂名額尚未完整核實；停留時間為規劃估計。請出發前向館方／店家確認，遇颱風另查停班休館公告。</p>
+            </aside>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <article class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-3">
+                        <p class="text-xs text-kanazawa-blue font-bold">室內景點・中西區</p>
+                        <h4 class="font-bold text-lg">臺南美術館1館</h4>
+                        <p class="text-sm font-medium text-kanazawa-green">建議預留 1–2 小時（估計）</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">看展與欣賞老建築，適合留在市中心、搭配咖啡店。</p>
+                        <p class="text-xs text-gray-600 leading-relaxed">請先確認當期展覽、場館開放狀態與票價。</p>
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=%E8%87%BA%E5%8D%97%E7%BE%8E%E8%A1%93%E9%A4%A81%E9%A4%A8%20%E5%8F%B0%E5%8D%97" target="_blank" rel="noopener noreferrer" class="inline-block text-sm text-kanazawa-blue underline">地圖搜尋／確認店址</a>
+                    </article>
+                    <article class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-3">
+                        <p class="text-xs text-kanazawa-blue font-bold">室內景點・南區</p>
+                        <h4 class="font-bold text-lg">黑橋牌香腸博物館</h4>
+                        <p class="text-sm font-medium text-kanazawa-green">建議預留約 1 小時（估計）</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">逛台南飲食文化與復古街景，也能選購伴手禮。</p>
+                        <p class="text-xs text-gray-600 leading-relaxed">一般參觀不代表包含香腸 DIY；體驗是否開放、是否須預約請另洽館方。</p>
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=%E9%BB%91%E6%A9%8B%E7%89%8C%E9%A6%99%E8%85%B8%E5%8D%9A%E7%89%A9%E9%A4%A8%20%E5%8F%B0%E5%8D%97" target="_blank" rel="noopener noreferrer" class="inline-block text-sm text-kanazawa-blue underline">地圖搜尋／確認店址</a>
+                    </article>
+                    <article class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-3">
+                        <p class="text-xs text-kanazawa-blue font-bold">室內景點・安南區</p>
+                        <h4 class="font-bold text-lg">國立臺灣歷史博物館</h4>
+                        <p class="text-sm font-medium text-kanazawa-green">建議預留 2–3 小時（估計）</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">室內展覽豐富，適合整個下午下雨時，替代四草、七股戶外行程。</p>
+                        <p class="text-xs text-gray-600 leading-relaxed">出發前確認開館日、票價與臨時公告；不直接排入週一北返行程。</p>
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9C%8B%E7%AB%8B%E8%87%BA%E7%81%A3%E6%AD%B7%E5%8F%B2%E5%8D%9A%E7%89%A9%E9%A4%A8%20%E5%8F%B0%E5%8D%97" target="_blank" rel="noopener noreferrer" class="inline-block text-sm text-kanazawa-blue underline">地圖搜尋／確認店址</a>
+                    </article>
+                    <article class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-3">
+                        <p class="text-xs text-kanazawa-blue font-bold">手作體驗・台南店待確認</p>
+                        <h4 class="font-bold text-lg">敲敲金工</h4>
+                        <p class="text-sm font-medium text-kanazawa-green">建議預留 2–3 小時（估計，依課程而定）</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">手作戒指，適合兩人製作紀念款，作為半天行程的主角。</p>
+                        <p class="text-xs text-gray-600 leading-relaxed">先確認台南上課地址、課程內容、費用、可訂日期與名額，尚未預約。</p>
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=%E6%95%B2%E6%95%B2%E9%87%91%E5%B7%A5%20%E5%8F%B0%E5%8D%97" target="_blank" rel="noopener noreferrer" class="inline-block text-sm text-kanazawa-blue underline">地圖搜尋／確認店址</a>
+                    </article>
+                    <article class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-3">
+                        <p class="text-xs text-kanazawa-blue font-bold">手作體驗・安平區</p>
+                        <h4 class="font-bold text-lg">安平陶坊</h4>
+                        <p class="text-sm font-medium text-kanazawa-green">建議預留 1–2 小時（估計）</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">玩陶、捏塑杯碗或小物，可視天氣搭配安平散步。</p>
+                        <p class="text-xs text-gray-600 leading-relaxed">先確認店家與課程是否仍開放預約、費用及燒製寄送方式；作品通常無法當天帶走。</p>
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=%E5%AE%89%E5%B9%B3%E9%99%B6%E5%9D%8A%20%E5%8F%B0%E5%8D%97" target="_blank" rel="noopener noreferrer" class="inline-block text-sm text-kanazawa-blue underline">地圖搜尋／確認店址</a>
+                    </article>
+                    <article class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 space-y-3">
+                        <p class="text-xs text-kanazawa-blue font-bold">手作體驗・七股區</p>
+                        <h4 class="font-bold text-lg">七股鹽山｜諾鹽罐 DIY</h4>
+                        <p class="text-sm font-medium text-kanazawa-green">體驗約 20 分鐘，另留報到與等候時間</p>
+                        <p class="text-sm text-gray-700 leading-relaxed">製作彩鹽紀念罐，原行程已列入，這裡作為短時間體驗參考。</p>
+                        <p class="text-xs text-gray-600 leading-relaxed">不屬於全室內替代路線，雨勢大不建議專程前往。固定場次未公布，請洽 06-7800511 分機 49；園區開放時間不代表 DIY 全時段受理。</p>
+                        <a href="https://www.google.com/maps/search/?api=1&amp;query=%E4%B8%83%E8%82%A1%E9%B9%BD%E5%B1%B1" target="_blank" rel="noopener noreferrer" class="inline-block text-sm text-kanazawa-blue underline">地圖搜尋／確認店址</a>
+                    </article>
+            </div>
         </section>
 
     </main>
